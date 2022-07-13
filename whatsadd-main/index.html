@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<meta charset="utf-8" />
+<title>Whatsadd - Envie mensagens sem adicionar ao whatsapp!</title>
+<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/intlTelInput67fb.css?v=QNZt3OCJjkDcQux0fPhDNA3vpX34zNhVyXznfGHYTrA" />
+<link rel="stylesheet" href="css/sitef5cd.css?v=0VTZlwsxx1Qy4U7lmXI5c9qeaQHXTzGw7_fGh7uLILc" />
+<link rel="stylesheet" href="WhatsappTools.stylesdd5a.css?v=0YnMTKXrxtbifZ48iYg84X7zhQTDN9lArQiQ0z4SYmw" />
+</head>
+<body>
+<script src="lib/jquery/dist/jquery.min.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/site2a24.js?v=1MCr7byOuCb4LNGd12lTEJKvw32zzt5Kr_FvhcTGO_E"></script>
+<script src="js/intlTelInput.min871d.js?v=NrEEn_R28v5aN2j-V-HQ6ZfSvj9FkT9PxVn0AH9-G8s"></script>
+<template id="contact-card-template">
+<div class='contact-card'>
+<div class="row no-gutters">
+<div class="col-9 contact-name">{{name}}</div>
+<div class="col-3 allo-align-end">
+<div class="delete-contact" onclick="entity.openRemoveContactDialog({{id}})"></div>
+</div>
+<div class="col-12 contact-phone">{{phone}}</div>
+<div class="col-9 contact-date">{{date}}</div>
+<div class="col-3 allo-align-end">
+<div class="send-contact-message" onclick="entity.goToContact({{id}})"></div>
+</div>
+</div>
+</div>
+</template>
+<template id="empty-template">
+<div class="empty-container">
+<span class="empty-container-title">Nada por aqui!</span>
+</div>
+</template>
+<button class="btn-link" onclick="entity.openLinkDialog()"></button>
+<div class="link-container d-none">
+<div class="link-card">
+<div class="window-close" onclick="entity.closeLinkDialog()">X</div>
+<div>
+<img src='images/allologo.png' width="200px" />
+</div>
+<br />
+<div>
+<a href="87%2c441%20Free%20icons%20of%20talk.html" title="talk icons">Talk icons created by Freepik - Flaticon</a><br />
+<a href="../www.flaticon.com/free-icons/contact.html" title="contact icons">Contact icons created by Taufik - Flaticon</a><br />
+<a href="907%20Free%20icons%20of%20whatsapp.html" title="whatsapp icons">Whatsapp icons created by Freepik - Flaticon</a>
+</div>
+</div>
+</div>
+<div class="div-page">
+<div id="message" class="info-banner d-none">
+</div>
+<div class="left-side-icon"></div>
+<div class="allo-container row no-gutters">
+<div class="window-overlay d-none">
+<div class="window-container">
+<div class="window-title-bar">
+<div class="window-title">-</div>
+<div class="window-close" onclick="entity.closeDialog()">X</div>
+</div>
+<div class="window-content">
+<div class="window-content-text">Tem certeza que deseja excluir esse contato?</div>
+<button class="btn-primary btn" onclick="entity.removeContact()">Excluir</button>
+</div>
+</div>
+</div>
+<div class="container-header">Envie mensagem sem adicionar o contato</div>
+<div class="container-content">
+<div class="row no-gutters">
+<div class="flag-selector col-10 offset-1 col-lg-2 offset-lg-1 p-2 pb-0 mt-2">
+<div class="flag-input">
+<input name="phone" type="text" id="phone" class="d-none" />
+</div>
+</div>
+<div class="col-10 offset-1 offset-lg-0 col-lg-3 p-2 allo-input-container mt-2">
+<span id="phone-validation" class="allo-input-error-message d-none">Insira o número com ddd</span>
+<div class="allo-input-box">
+<input type="search" class="allo-input" autocomplete="do-not-autofill" id="txtPhone" placeholder="dddnumero" />
+</div>
+</div>
+<div class="col-10 offset-1 offset-lg-0 col-lg-4 p-2 allo-input-container mt-2">
+<span id="name-validation" class="allo-input-error-message d-none">Adicione um nome ao contato</span>
+<div class="allo-input-box">
+<input type="search" class="allo-input" autocomplete="do-not-autofill" id="txtValue" placeholder="Nome" disabled />
+</div>
+</div>
+<div class="col-10 d-none d-lg-block offset-1 offset-lg-0 col-lg-2 p-2 mt-2">
+<button class="btn-send" onclick="entity.next()"></button>
+<div class="loading spinner-border text-primary d-none" role="status"></div>
+</div>
+<div class="col-4 offset-4 offset-lg-0 col-lg-12 switch-container mt-3">
+<label class="switch">
+<input type="checkbox" onchange={entity.toggleSave()}>
+<span class="slider round"></span>
+</label>
+<label>Salvar</label>
+</div>
+<div class="col-3 d-lg-none mt-2 allo-align-end">
+<button class="btn-send" onclick="entity.next()"></button>
+<div class="loading spinner-border text-primary d-none" role="status"></div>
+</div>
+<div class="col-12 p-2 mt-4" style="text-align: center; color: #AEAEAE">
+No celular: abrirá o aplicativo
+<br />No computador: abrirá a tela do aplicativo Web
+</div>
+</div>
+</div>
+<div class="container-contacts">
+<span class="contact-title-line">
+</span>
+<span class="contact-title">
+Contatos
+</span>
+<div class="delete-contact blocked" onclick="entity.openRemoveAllContactsDialog()"></div>
+<div class="contacts-list empty">
+</div>
+</div>
+</div>
+</div>
+<script>
+    var interval = null;
+    
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        preferredCountries: ["br"]
+    });
+
+    $(document).ready(function() {
+        entity.init();
+
+        var input = document.getElementById("txtPhone");
+        var inputName = document.getElementById("txtValue");
+
+        input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            entity.next();
+          }
+        });
+
+        inputName.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            entity.next();
+          }
+        });
+
+
+        $('input').focus(function() {
+           $('footer').addClass('hide-footer');
+        });
+
+        $('input').focusout(function() {
+            setTimeout(() => {
+                $('footer').removeClass('hide-footer');
+            }, 200)
+        });
+
+        //$("#btnSend").on('click', function() {
+        //    window.location.href = "https://api.whatsapp.com/send?phone=" + $("#txtPhone").val();
+        //})
+
+    });
+</script>
+<style>
+    @font-face {
+        font-family: 'Titillium Web';
+        src: URL('TitilliumWeb-Regular.ttf') format('truetype');
+    }
+    .info-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        justify-content: center;
+        color: white;
+    }
+    .info-banner.success {
+        background-color: #0063fe;
+    }
+    .info-banner.error {
+        background-color: #F20F00;
+    }
+    .info-banner.formaterror {
+        background-color: #151515;
+    }
+    .div-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column
+    }
+    .page-title-icon {
+        vertical-align: initial;
+        margin-right: 10px;
+    }
+    .page-title {
+        padding: 50px;
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 54px;
+        color: #151515;
+        text-align: center;
+        font-family: Titillium Web;
+    }
+
+    .page-subtitle {
+        padding: 20px;
+        padding-top: 0;
+        padding-bottom: 35px;
+        text-align: center;
+        font-size: 22px;
+        color: #a3a3a3;
+        max-width: 400px;
+        font-family: Titillium Web;
+    }
+  
+    
+    @media all and (max-width: 430px) {
+        .page-title {
+            padding: 0;
+        }
+        
+        .page-subtitle {
+            padding-bottom: 0;
+        }
+        .info-banner {
+            font-size: 20px;
+        }
+    }
+    
+    footer {
+        display: flex;
+        left: 0;
+        bottom: 10px;
+        right: 0;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+    }
+    footer img {
+        width: 33vw;
+        max-width: 140px;
+    }
+
+    @media screen and (max-width: 800px) {
+        .hide-footer {
+            display: none;
+        }
+    }
+</style>
+</body>
+
+<!-- Mirrored from www.whatsadd.com.br/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Jun 2022 11:54:38 GMT -->
+</html>
+<style>
+    body{
+        background: #f5f5f5;
+    }
+</style>
